@@ -139,5 +139,47 @@ void task58()
 
 void task62()
 {
+    Console.Write("Введите желаемое кол-во строк в двумерном массиве: ");
+    int line = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Введите желаемое кол-во столбцов в двумерном массиве: ");
+    int column = Convert.ToInt32(Console.ReadLine());
 
-}
+
+    int[,] array = new int [line, column];
+    int value = 1;
+    int minLine = 0, minColumn = 0;
+    int maxLine = array.GetLength(0)-1, maxColumn = array.GetLength(1)-1;
+
+    while (value < line * column)
+    {
+// Заполнение верхней строки
+        for (int i = minColumn; i <= maxColumn; i++)
+        {
+            array[minLine, i] = value++;
+        }
+        minLine++;
+
+// Заполнение правого столбца 
+        for (int i = minLine; i <= maxLine; i++)
+        {
+            array[i, maxColumn] = value++;
+        }
+        maxColumn--;
+
+// Заполнение нижней строки
+        for (int i = maxColumn; i >= minColumn; i--)
+        {
+            array[maxLine, i] = value++;
+        }
+        maxLine--;
+
+// Заполнение левого столбца
+        for (int i = maxColumn; i >= minLine; i--)
+        {
+            array[i, minColumn] = value++;
+        }
+        minColumn++;
+    }
+    Print2DArray(array);
+}   
+
